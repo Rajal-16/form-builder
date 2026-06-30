@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { FormModule } from './form/form.module';
+import { ResponseModule } from './response/response.module';
 
 @Module({
   imports: [
@@ -40,6 +41,8 @@ import { FormModule } from './form/form.module';
     }),
 
     FormModule,
+
+    ResponseModule,
 
   ],
 })

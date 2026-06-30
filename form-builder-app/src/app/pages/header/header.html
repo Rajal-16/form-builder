@@ -1,0 +1,48 @@
+<div class="container">
+
+    <h1 class="form-title">FORM BUILDER</h1>
+
+    <div class="tabs-wrapper">
+
+        <div routerLink="/form-setup" routerLinkActive="active" (click)="setActiveLink('form-setup')" class="tab">
+            <img src="assets/images/frame-1.png" alt="">
+            Form Setup
+        </div>
+
+        <div routerLink="/form-builder" routerLinkActive="active" (click)="setActiveLink('form-builder')" class="tab ">
+            <img src="assets/images/frame-2.png" alt="">
+            Form Builder
+        </div>
+
+        <div routerLink="/integration" routerLinkActive="active" (click)="setActiveLink('integration')" class="tab">
+            <img src="assets/images/frame-3.png" alt="">
+            Integration Code
+        </div>
+
+
+     
+         <div class="action-buttons">
+
+            <button type="button" class="btn-cancel" (click)="cancel()">
+                <img src="assets/images/vector-2.png" alt="">
+                Cancel
+            </button>
+
+          
+            <button type="button" class="btn-save" (click)="saveAndNext()">
+                <img src="assets/images/vector-1.png" alt="">
+                Save & Next
+            </button>
+           
+        </div>
+       
+
+
+       
+    </div>
+
+
+
+
+
+</div>

@@ -1,0 +1,193 @@
+
+<div class="container">
+
+    <h1 class="form-title">FORM BUILDER</h1>
+
+    <div class="tabs-wrapper">
+
+        <div routerLink="/form-setup"   class="tab ">
+            <img src="assets/images/frame-1.png" alt="">
+            Form Setup
+        </div>
+
+        <div routerLink="/form-builder"  class="tab active">
+            <img src="assets/images/frame-2.png" alt="">
+            Form Builder
+        </div>
+
+        <div routerLink="/integration"  class="tab">
+            <img src="assets/images/frame-3.png" alt="">
+            Integration Code
+        </div>
+
+
+     
+         <div class="action-buttons">
+
+          <button type="button" class="btn-save" (click)="preview()">
+            Preview
+          </button>
+
+
+          <button type="button" class="btn-save" (click)="publishForm()">
+                Publish
+            </button>
+
+            <button type="button" class="btn-cancel" (click)="cancel()">
+                <img src="assets/images/vector-2.png" alt="">
+                Cancel
+            </button>
+
+          
+            
+           
+        </div> 
+    </div>
+
+<div class="form-builder">
+
+  <div class="builder-container">
+
+    <div class="palette">
+      <div class="search">
+        <div class="wrap">
+          <img src="/assets/icons-sidebar/image.png" alt="" width="20px" height="20px">
+          <input type="text" placeholder="Search Name Here" [(ngModel)]="searchTerm" />
+        </div>
+        <img (click)="searchTerm = ''" src="/assets/icons-sidebar/close-btn.png" alt="" width="20px" height="20px">
+      </div>
+
+      <div class="palette-label"><b>Custom Elements</b></div>
+
+      <div class="palette-grid">
+        <div class="palette-item" *ngFor="let item of filteredPalette" draggable="true"
+          (dragstart)="onPaletteDragStart($event, item)" (click)="addField(item.kind)">
+          <img class="sidebar-icon" src="{{item.glyph}}" alt="">
+          <span class="sidebar-label"><b>{{ item.label }}</b></span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="canvas-container">
+
+      <div class="canvas" (dragover)="onCanvasDragOver($event)" (drop)="onCanvasDrop($event)">
+        <div class="canvas-title">Add Your Field</div>
+
+        <div class="empty-hint" *ngIf="fields.length === 0">
+          No fields yet. Add fields from the left panel to start building your form.
+        </div>
+
+        <div class="field-card" *ngFor="let field of fields">
+
+
+          <div class="field-card-header" (click)="toggleExpand(field)">
+
+            <img class="field-icon" src="{{field.glyph}}" alt="">
+            <span class="field-type">{{ field.displayName }}</span>
+            <span class="badge" *ngIf="field.required">Required</span>
+            <span class="space"></span>
+            <img class="chevron" [class.up]="field.expanded" src="/assets/images/up-arrow.png" alt="" width="20px" height="20px">
+            
+
+          </div>
+
+          <div class="field-card-body" *ngIf="field.expanded" (click)="$event.stopPropagation()">
+
+
+            <div class="row two-col">
+
+              <div class="field">
+
+                <label><img src="/assets/images/drop-option-icon.png" alt="" width="20px" height="20px">Field Label
+                  <span class="req">*</span></label>
+                <input class="input-holder" type="text" placeholder="Enter Field Label Name"
+                  [(ngModel)]="field.label" />
+
+              </div>
+
+              <div class="field">
+                <label><img src="/assets/images/drop-option-icon.png" alt="" width="20px" height="20px">Placeholder
+                  <span class="req">*</span></label>
+                <input type="text" placeholder="Placeholder" [(ngModel)]="field.placeholder" />
+              </div>
+            </div>
+
+
+
+            <div class="row" *ngIf="field.showDescription">
+              <div class="field full">
+
+                <textarea class="desc" placeholder="Description" [(ngModel)]="field.description"></textarea>
+              </div>
+            </div>
+
+
+
+            <div class="options-block" *ngIf="field.hasOptions">
+              <div class="option-row" *ngFor="let opt of field.options; let i = index; trackBy: trackByIndex">
+                <input type="text" placeholder="options" [(ngModel)]="field.options[i]" />
+                <img class="icon-btn danger" (click)="removeOption(field, i)" src="/assets/images/Cancel.png" alt=""
+                  width="15px" height="15px">
+
+              </div>
+              <button type="button" class="link-btn" (click)="addOption(field)">Add option</button>
+            </div>
+
+
+
+            <div class="row validation-row" *ngIf="field.showValidation">
+
+              <select [(ngModel)]="field.validation.type">
+                <option *ngFor="let t of validationTypeOptions" [value]="t">{{ t }}</option>
+              </select>
+
+              <select [(ngModel)]="field.validation.operator">
+                <option *ngFor="let op of operatorOptions" [value]="op">{{ op }}</option>
+              </select>
+
+              <input type="text" placeholder="Number" [(ngModel)]="field.validation.value" />
+              <input type="text" placeholder="Custom Error Text" [(ngModel)]="field.validation.errorText" />
+
+            </div>
+
+            <div class="field-card-footer">
+
+              <img class="icon-btn" (click)="duplicateField(field)" title="Duplicate" src="/assets/images/copy-btn.png"
+                alt="">
+              <img class="icon-btn" (click)="removeField(field)" title="Delete" src="/assets/images/delete-btn.png"
+                alt="">
+
+              <span class="divider"></span>
+
+              <span class="required-label">Required</span>
+
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="field.required" />
+                <span class="slider"></span>
+              </label>
+
+
+              <div class="opt-wrap">
+
+                <button class="icon-btn" type="button" (click)="toggleMenu(field, $event)">⋮</button>
+
+                <div class="opt-menu" *ngIf="field.menuOpen" (click)="$event.stopPropagation()">
+
+                  <div class="opt-item" (click)="selectMenuOption(field, 'Show')">Show</div>
+
+                  <div class="opt-item" (click)="selectMenuOption(field, 'Description')">Description</div>
+
+                  <div class="opt-item" (click)="selectMenuOption(field, 'Response Validation')">Response Validation
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>

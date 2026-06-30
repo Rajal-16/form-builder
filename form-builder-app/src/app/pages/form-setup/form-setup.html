@@ -1,0 +1,316 @@
+<div class="container">
+
+    <h1 class="form-title">FORM BUILDER</h1>
+
+    <div class="tabs-wrapper">
+
+        <div routerLink="/form-setup"   class="tab active">
+            <img src="assets/images/frame-1.png" alt="">
+            Form Setup
+        </div>
+
+        <div routerLink="/form-builder"  class="tab ">
+            <img src="assets/images/frame-2.png" alt="">
+            Form Builder
+        </div>
+
+        <div routerLink="/integration"  class="tab">
+            <img src="assets/images/frame-3.png" alt="">
+            Integration Code
+        </div>
+
+
+     
+         <div class="action-buttons">
+
+            <button type="button" class="btn-cancel" (click)="cancel()">
+                <img src="assets/images/vector-2.png" alt="">
+                Cancel
+            </button>
+
+          
+            <button type="button" class="btn-save" (click)="saveAndNext()">
+                <img src="assets/images/vector-1.png" alt="">
+                Save & Next
+            </button>
+           
+        </div> 
+    </div>
+
+
+<form [formGroup]="form" class="page-container">
+
+  <div class="form-card">
+
+    <div class="row">
+
+      <div class="form-group">
+        <label>
+     <img src="assets/images/frame-5.png" alt="">
+Form Name <span>*</span></label>
+
+        <input
+          type="text"
+          formControlName="formName"
+          placeholder="Enter your form name">
+
+        @if(f['formName'].touched && f['formName'].invalid){
+          <small class="error">Form Name is required</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>
+           <img src="assets/images/frame-4.png" alt="">
+            Branch <span>*</span></label>
+         
+
+        <select formControlName="branch"
+        [ngClass]="{
+    'placeholder-select': !form.get('branch')?.value
+  }">
+
+             <option value="" disabled >Select Branch</option>
+          @for(branch of branches; track branch){
+            <option [value]="branch">{{ branch }}</option>
+          }
+        </select>
+
+        @if(f['branch'].touched && f['branch'].invalid){
+          <small class="error">Branch is required</small>
+        }
+      </div>
+
+    </div>
+
+    <!-- Row 2 -->
+
+    <div class="row">
+
+      <div class="form-group">
+        <label>
+          <img src="assets/images/frame-6.png" alt="">
+            Logo URL</label>
+
+        <input
+          type="text"
+          formControlName="logoUrl"
+          placeholder="Optional">
+
+        @if(f['logoUrl'].touched && f['logoUrl'].errors?.['pattern']){
+          <small class="error">Enter valid URL</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>
+            <img src="assets/images/frame-7.png" alt="">
+
+            Section <span>*</span></label>
+
+        
+        <select formControlName="section"
+          [ngClass]="{
+    'placeholder-select': !form.get('section')?.value
+    }">
+
+              <option value="" disabled>Select Section</option>
+
+          @for(section of sections; track section){
+            <option [value]="section">{{ section }}</option>
+          }
+        </select>
+
+        @if(f['section'].touched && f['section'].invalid){
+          <small class="error">Section is required</small>
+        }
+      </div>
+
+    </div>
+
+    <!-- Row 3 -->
+
+    <div class="row">
+
+      <div class="form-group">
+        <label>
+  <img src="assets/images/frame-8.png" alt="">
+            Responsible User</label>
+
+        
+
+        <select formControlName="responsibleUser"
+         [ngClass]="{
+    'placeholder-select': !form.get('responsibleUser')?.value
+    }">
+
+            <option value="" disabled>Select User</option>
+          @for(user of responsibleUsers; track user){
+            <option [value]="user">{{ user }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          <img src="assets/images/frame-9.png" alt=""> 
+            Form Status <span>*</span></label>
+
+        <div class="status-wrapper">
+
+          <label
+            class="radio-card"
+            [class.active-radio]="form.get('status')?.value === 'unpublished'">
+
+           
+
+            Unpublished
+
+             <input
+              type="radio"
+              value="unpublished"
+              formControlName="status">
+
+          </label>
+
+          <label
+            class="radio-card"
+            [class.active-radio]="form.get('status')?.value === 'published'">
+
+            
+
+            Published
+
+            <input
+              type="radio"
+              value="published"
+              formControlName="status">
+
+          </label>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Row 4 -->
+
+    <div class="row">
+
+      <div class="form-group">
+        <label>
+           <img src="assets/images/frame-10.png" alt="">
+
+            Submitted Button Name <span>*</span></label>
+
+         
+
+        <select formControlName="buttonName"
+         [ngClass]="{
+    'placeholder-select': !form.get('buttonName')?.value
+    }">
+
+            <option value="" hidden>Select Button Name</option>
+          @for(button of buttonNames; track button){
+            <option [value]="button">{{ button }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>
+           <img src="assets/images/frame-11.png" alt="">
+            Default Academic Year</label>
+
+        <select formControlName="academicYear"
+         [ngClass]="{
+    'placeholder-select': !form.get('academicYear')?.value
+    }">
+
+              <option value="" disabled>Select Academic Year</option>
+          @for(year of academicYears; track year){
+            <option [value]="year">{{ year }}</option>
+          }
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Row 5 -->
+
+    <div class="row">
+
+      <div class="form-group">
+        <label>
+          <img src="assets/images/frame-12.png" alt="">
+
+            Description</label>
+
+        <textarea
+          rows="5"
+          formControlName="description"
+          placeholder="Enter Description">
+        </textarea>
+      </div>
+
+      <div class="form-group">
+
+        <label>
+      <img src="assets/images/frame-13.png" alt="">
+
+            Message To Show After Form is Successfully Submitted.
+          <span>*</span>
+        </label>
+
+       <textarea
+  rows="5"
+  formControlName="successMessage"
+  [class.placeholder-text]="
+    form.get('successMessage')?.value ===
+    'Your Inquiry Has Been Sumited Successfully!'
+  ">
+</textarea>
+
+        @if(f['successMessage'].touched && f['successMessage'].invalid){
+          <small class="error">
+            Success Message is required
+          </small>
+        }
+
+      </div>
+
+    </div>
+
+    <!-- Last Row -->
+
+    <div class="full-width">
+
+      <label>
+      <img src="assets/images/frame-14.png" alt="">
+
+        Message To Show Before Inquiry Submit Confirmation.
+        <span>*</span>
+      </label>
+
+     <textarea
+  rows="4"
+  formControlName="confirmMessage"
+  [class.placeholder-text]="
+    form.get('confirmMessage')?.value ===
+    'Are you sure you want to submit your inquiry? Please review your details before proceeding.'
+  ">
+</textarea>
+
+      @if(f['confirmMessage'].touched && f['confirmMessage'].invalid){
+        <small class="error">
+          Confirmation Message is required
+        </small>
+      }
+
+    </div>
+
+  </div>
+
+</form>

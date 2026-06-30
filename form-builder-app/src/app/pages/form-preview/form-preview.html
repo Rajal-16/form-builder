@@ -1,0 +1,160 @@
+<div class="preview-page">
+
+  <div class="preview-wrapper" *ngIf="!submitted">
+
+    <div class="form-header-card">
+      <div class="accent-bar"></div>
+      <img *ngIf="setup.logoUrl" [src]="setup.logoUrl" alt="" class="form-logo">
+      <h1 class="form-title">{{ setup.formName || 'Untitled Form' }}</h1>
+      <p class="form-description" *ngIf="setup.description">{{ setup.description }}</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" novalidate>
+
+      <div class="field-card" *ngFor="let field of fields" [class.has-error]="errors[field.id]">
+
+        <div class="field-label-row">
+          <label>{{ field.label || field.displayName }}</label>
+          <span class="required-star" *ngIf="field.required">*</span>
+        </div>
+
+        <p class="field-description" *ngIf="field.showDescription && field.description">
+          {{ field.description }}
+        </p>
+
+        
+        <input
+          *ngIf="field.kind === 'single-line'"
+          type="text"
+          class="text-input"
+          [placeholder]="field.placeholder"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id">
+
+      
+        <textarea
+          *ngIf="field.kind === 'paragraph'"
+          class="textarea-input"
+          rows="3"
+          [placeholder]="field.placeholder"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id">
+        </textarea>
+
+        
+        <div class="options-list" *ngIf="field.kind === 'checkbox'">
+          <label class="option-row" *ngFor="let opt of field.options">
+            <input
+              type="checkbox"
+              [checked]="isChecked(field, opt)"
+              (change)="toggleCheckbox(field, opt)">
+            <span>{{ opt }}</span>
+          </label>
+        </div>
+
+        
+        <div class="options-list" *ngIf="field.kind === 'radio'">
+          <label class="option-row" *ngFor="let opt of field.options">
+            <input
+              type="radio"
+              [name]="field.id"
+              [value]="opt"
+              [(ngModel)]="answers[field.id]">
+            <span>{{ opt }}</span>
+          </label>
+        </div>
+
+      
+        <select
+          *ngIf="field.kind === 'dropdown'"
+          class="select-input"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id">
+          <option value="" disabled>Choose</option>
+          <option *ngFor="let opt of field.options" [value]="opt">{{ opt }}</option>
+        </select>
+
+        
+        <input
+          *ngIf="field.kind === 'date'"
+          type="date"
+          class="text-input"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id">
+
+       
+        <input
+          *ngIf="field.kind === 'time'"
+          type="time"
+          class="text-input"
+          [(ngModel)]="answers[field.id]"
+          [name]="field.id">
+
+       
+        <div class="upload-box" *ngIf="field.kind === 'upload'">
+          <label class="upload-btn">
+            Choose File
+            <input type="file" (change)="onFileChange(field, $event)" hidden>
+          </label>
+          <span class="file-name">{{ fileNames[field.id] || 'No file chosen' }}</span>
+        </div>
+
+        
+        <div class="image-placeholder" *ngIf="field.kind === 'image'">
+          <label class="upload-btn">
+            Choose File
+            <input type="file" (change)="onFileChange(field, $event)" hidden>
+          </label>
+        </div>
+
+       
+        <label class="option-row terms-row" *ngIf="field.kind === 'terms'">
+          <input type="checkbox" [(ngModel)]="answers[field.id]" [name]="field.id">
+          <span>{{ field.placeholder || field.label || 'I agree to the terms and conditions' }}</span>
+        </label>
+
+    
+        <div class="rating-row" *ngIf="field.kind === 'rating-star'">
+          <span
+            class="star"
+            *ngFor="let n of ratingRange(field)"
+            [class.filled]="n <= answers[field.id]"
+            (click)="setRating(field, n)">★</span>
+        </div>
+
+  
+        <div class="rating-row" *ngIf="field.kind === 'rating-number'">
+          <span
+            class="number-pill"
+            *ngFor="let n of ratingRange(field)"
+            [class.active]="n === answers[field.id]"
+            (click)="setRating(field, n)">{{ n }}</span>
+        </div>
+
+        <small class="error" *ngIf="errors[field.id]">{{ errors[field.id] }}</small>
+
+      </div>
+
+      <div class="empty-hint" *ngIf="fields.length === 0">
+        This form doesn't have any fields yet. Go back to the Form Builder to add some.
+      </div>
+
+      <div class="submit-row" *ngIf="fields.length > 0">
+        <button type="submit" class="submit-btn">{{ setup.buttonName || 'Submit' }}</button>
+        <button type="button" class="back-btn" (click)="backToBuilder()">Back to Builder</button>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="success-wrapper" *ngIf="submitted">
+    <div class="success-card">
+      <div class="accent-bar"></div>
+      <p class="success-message">{{ setup.successMessage }}</p>
+      <a class="submit-another" (click)="submitAnother()">Submit another response</a>
+    </div>
+  </div>
+
+</div>

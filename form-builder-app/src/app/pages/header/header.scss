@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: #f5f6fa;
+}
+
+
+.form-title {
+  width: 1380px;
+  height: 36px;
+  position: relative;
+  top: 9px;
+  left: 30px;
+
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+
+  letter-spacing: 0%;
+  text-transform: uppercase;
+
+  color: #000000;
+  opacity: 1;
+
+margin-bottom: 20px;
+}
+
+.page-container {
+  background: #f5f6fa;
+  min-height: 100vh;
+}
+
+/* HEADER */
+
+.top-header {
+  height: 62px;
+  background: #f5f6fa;
+  border-bottom: 1px solid #e8e8e8;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 16px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* TABS */
+
+
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 20px;
+
+  color: #888;
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.container{
+    background-color: #F7F8FA;
+}
+
+.active {
+  color: #030A17;
+
+  border-bottom: 2px solid #030A17;
+}
+
+
+.btn-cancel {
+  height: 38px;
+  padding: 0 16px;
+
+  border: 1px solid #ddd;
+  border-radius: 4px;
+
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+    white-space: nowrap;
+
+    font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  background-color: #E6E6E6;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-cancel:hover {
+  background: #f5f5f5;
+}
+
+.btn-cancel svg,
+.btn-save svg {
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+  display: block;
+}
+
+.btn-save {
+  height: 38px;
+  padding: 0 16px;
+
+  border: none;
+  border-radius: 4px;
+
+  
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+    white-space: nowrap;
+
+    font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  background: #01329C;
+
+  color: white;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-save:hover {
+  background: #2247d6;
+}
+
+.tabs-wrapper {
+  margin-top: 20px;
+   margin-left: 18px;
+     margin-right: 18px;
+  background: white;
+
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  opacity: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #ffffff;
+  border-bottom: 1px solid #ececec;
+ padding: 0 16px;
+ 
+  box-sizing: border-box;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}

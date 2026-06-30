@@ -1,0 +1,818 @@
+
+@import url('https://googleapis.com');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+
+$fb-bg:          #f6f7f9;
+$fb-white:       #ffffff;
+$fb-border:      #e7e9ee;
+$fb-border-soft: #eef0f3;
+
+$fb-text:        #1f2430;
+$fb-text-muted:  #8a8f9c;
+$fb-text-faint:  #b6bac4;
+
+$fb-blue:        #2f6fed;
+$fb-blue-soft:   #eaf1ff;
+$fb-blue-dark:   #1d2b53;
+
+$fb-red:         #e5484d;
+$fb-red-soft:    #fdecec;
+
+$radius-lg: 14px;
+$radius-md: 10px;
+$radius-sm: 7px;
+
+$shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04);
+$shadow-pop:  0 8px 24px rgba(16, 24, 40, 0.12);
+
+
+$icon-label: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'><rect x='1' y='3' width='12' height='2' rx='1' fill='%238A8F9C'/><rect x='1' y='9' width='8' height='2' rx='1' fill='%238A8F9C'/></svg>");
+
+
+$icon-chevron: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%238A8F9C' stroke-width='1.4' fill='none'/></svg>");
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: #f5f6fa;
+}
+
+
+.form-title {
+  width: 1380px;
+  height: 36px;
+  position: relative;
+  top: 9px;
+  left: 30px;
+
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+
+  letter-spacing: 0%;
+  text-transform: uppercase;
+
+  color: #000000;
+  opacity: 1;
+
+margin-bottom: 20px;
+}
+
+.page-container {
+  background: #f5f6fa;
+  min-height: 100vh;
+}
+
+
+
+.top-header {
+  height: 62px;
+  background: #f5f6fa;
+  border-bottom: 1px solid #e8e8e8;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 16px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  height: 55px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 20px;
+
+  color: #888;
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.container{
+    background-color: #F7F8FA;
+}
+
+.active {
+  color: #030A17;
+
+  border-bottom: 2px solid #030A17;
+}
+
+
+.btn-cancel {
+  height: 38px;
+  padding: 0 16px;
+
+  border: 1px solid #ddd;
+  border-radius: 4px;
+
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+    white-space: nowrap;
+
+    font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  background-color: #E6E6E6;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-cancel:hover {
+  background: #f5f5f5;
+}
+
+.btn-cancel svg,
+.btn-save svg {
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+  display: block;
+}
+
+.btn-save {
+  height: 38px;
+  padding: 0 16px;
+
+  border: none;
+  border-radius: 4px;
+
+  
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+    white-space: nowrap;
+
+    font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  background: #01329C;
+
+  color: white;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-save:hover {
+  background: #2247d6;
+}
+
+.tabs-wrapper {
+  margin-top: 20px;
+   margin-left: 18px;
+     margin-right: 18px;
+  background: white;
+
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  opacity: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #ffffff;
+  border-bottom: 1px solid #ececec;
+ padding: 0 16px;
+ 
+  box-sizing: border-box;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+@mixin field-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  color: $fb-text;
+  background: $fb-white;
+  border: 1px solid $fb-border;
+  border-radius: 8px;
+  outline: none;
+
+  &::placeholder { color: $fb-text-faint; }
+  &:focus { border-color: $fb-blue; }
+}
+
+@mixin icon-chip($bg, $color) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: $bg;
+  color: $color;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+
+
+.form-builder {
+  background: $fb-bg;
+  min-height: 100vh;
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: $fb-text;
+}
+
+.builder-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px 24px;
+}
+
+
+
+.swatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+
+
+.palette {
+  flex: 0 0 230px;
+  background: $fb-white;
+  border: 1px solid $fb-border;
+  border-radius: $radius-lg;
+  padding: 16px;
+  box-shadow: $shadow-card;
+
+  .search {
+    position: relative;
+    display: flex;
+    width: 301px;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border: 1px solid #78787826;
+    padding: 14px 14px 14px 12px;
+    gap: 10px;
+   justify-content: space-between;
+   align-items: center;
+
+  
+  }
+
+  .wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search input{
+    width: 143px;
+    height: 20px;
+    gap: 10px;
+    border: none;
+  }
+
+  .palette-label {
+    
+    height: 8px;
+    font-size: 12px;
+    font-weight: 500;
+   font-family: 'Poppins', sans-serif;
+    color: black;
+    margin-bottom: 20px;
+  }
+
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .sidebar-icon{
+    width: 39.06px;
+    height: 39.06px;
+  }
+
+
+  .sidebar-label{
+
+    width: 71px;
+    height: 22px;
+    font: 'Hanken Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 15.62px;
+  }
+  .palette-item {
+    width: 145.5px;
+    height: 100.58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 6px;
+    border: 0.98px solid #B7B7B73D;
+    border-radius: 7.81px;
+    background: $fb-white;
+    text-align: center;
+    cursor: grab;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+
+    &:hover {
+      border-color: $fb-blue;
+      box-shadow: 0 2px 8px rgba(47, 111, 237, 0.12);
+    }
+
+    &:active {
+      cursor: grabbing;
+      transform: scale(0.98);
+    }
+
+    .swatch {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      font-size: 16px;
+    }
+
+    span:last-child {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: $fb-text;
+      line-height: 1.3;
+    }
+  }
+}
+
+
+
+
+.canvas-container{
+height: 750px;
+width: 1350px;
+   background: $fb-white;
+   border: 1px solid #FFFFFF;
+
+}
+
+.canvas {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  width: 1300px;
+
+  top: 16px;
+  left: 16px;
+  border-radius: 14px;
+  background: $fb-bg;
+  border: 1px solid $fb-border;
+  border-radius: $radius-lg;
+  padding: 20px 22px 26px;
+  box-shadow: $shadow-card;
+
+  .canvas-title {
+    position: relative;
+
+    font: "Poppins";
+    font-size: 18px;
+    font-weight: 600;
+    color: $fb-text;
+    margin-bottom: 20px;
+  }
+
+  .empty-hint {
+    border: 1.5px dashed $fb-border;
+    border-radius: $radius-md;
+    padding: 42px 20px;
+    text-align: center;
+    font-size: 13px;
+    font-family: "Poppins";
+    color: $fb-text-muted;
+    background: $fb-white;
+  }
+}
+
+
+
+.field-card {
+  border: 1px solid $fb-border;
+  border-radius: $radius-md;
+  margin-bottom: 14px;
+  overflow: hidden;
+  background: $fb-white;
+
+  .field-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+
+    .field-type {
+    
+      font-size: 16px;
+    font-weight: 600;
+   font-family: 'Poppins', sans-serif;
+    color: black;
+     
+  
+
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: $fb-red;
+      background: $fb-red-soft;
+      padding: 3px 8px;
+      border-radius: 20px;
+    }
+
+    .space { flex: 1; }
+  }
+
+
+  .chevron {
+    @include icon-chip($fb-blue-soft, $fb-blue);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 15px;
+    line-height: 1;
+    transition: transform 0.18s ease, background 0.15s ease;
+
+    &:hover { background: darken($fb-blue-soft, 4%); }
+    &.up { transform: rotate(180deg); }
+  }
+
+  .field-card-body {
+    padding: 18px 18px 18px;
+    border-top: 1px solid $fb-border-soft;
+  }
+}
+
+.desc::placeholder{
+font-size: 16px;
+    font-weight: 600;
+   font-family: 'Poppins', sans-serif;
+    color: black;
+     
+}
+
+
+
+.row {
+  margin-bottom: 16px;
+
+  &.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+}
+
+.input-holder{
+
+   font-family: 'Poppins', sans-serif;
+    color: black;
+     
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 15px;
+
+  &.full { width: 100%; }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 500;
+   font-family: 'Poppins', sans-serif;
+    color: black;
+     
+    .req { color: $fb-red; }
+  }
+
+  input::placeholder{
+    font-family:"Poppins";
+    font-size: 14px;
+  }
+
+  input[type="text"],
+  textarea {
+    @include field-input;
+  }
+
+  textarea {
+    min-height: 84px;
+    resize: vertical;
+    font-family: inherit;
+  }
+}
+
+
+
+.options-block {
+  margin-bottom: 16px;
+
+  > label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: $fb-text-muted;
+    margin-bottom: 8px;
+  }
+
+  .option-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    input::placeholder{
+      font-family: "Poppins";
+      font-size: 14px;
+    }
+
+    input[type="text"] {
+      @include field-input;
+      flex: 1;
+    }
+  }
+
+  .link-btn {
+    border: none;
+    width: 104px;
+    height: 40px;
+   background: #D9E5FFD9;
+
+color: #01329C;
+
+    font-family: "Poppins";
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 0;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+.validation-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.4fr;
+  gap: 12px;
+
+  select,
+  input[type="text"] {
+    @include field-input;
+  }
+
+  
+    input::placeholder{
+      font-family: "Poppins";
+  
+
+    }
+
+  select {
+    appearance: none;
+    background-image: $icon-chevron;
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 28px;
+    cursor: pointer;
+    font-family: "Poppins";
+    font-size: 14px;
+  }
+}
+
+
+.field-card-footer {
+  display: flex;
+  justify-content: flex-end;   // Move everything to the right
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid $fb-border-soft;
+
+  .icon-btn {
+    @include icon-chip($fb-blue-soft, $fb-blue);
+    width: 30px;
+    height: 30px;
+    border-radius: $radius-sm;
+    font-size: 14px;
+
+    &:hover {
+      background: darken($fb-blue-soft, 4%);
+    }
+
+    &.danger {
+      background: $fb-red-soft;
+      color: $fb-red;
+
+      &:hover {
+        background: darken($fb-red-soft, 4%);
+      }
+    }
+  }
+
+  .divider {
+    width: 1px;
+    height: 22px;
+    background: $fb-border;
+  }
+
+  .required-label {
+    font-size: 13px;
+    color: #000000;
+    font-family: "Poppins";
+    font-weight: 500;
+
+  }
+
+  .opt-wrap {
+    position: relative;
+  }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  flex-shrink: 0;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .slider {
+      background-color: $fb-blue;
+
+      &::before { transform: translateX(16px); }
+    }
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #d9dce2;
+    border-radius: 22px;
+    transition: background-color 0.18s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      top: 3px;
+      background-color: $fb-white;
+      border-radius: 50%;
+      transition: transform 0.18s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+
+.opt-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  background: $fb-white;
+  border: 1px solid $fb-border;
+  border-radius: 10px;
+  box-shadow: $shadow-pop;
+  min-width: 190px;
+  padding: 6px;
+  z-index: 20;
+
+  .opt-item {
+    padding: 9px 10px;
+    font-size: 13px;
+    color: $fb-text;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: "Poppins";
+
+    &:hover { background: $fb-bg; }
+  }
+}
+
+
+.builder-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: $fb-white;
+  border-bottom: 1px solid $fb-border;
+
+  .tabs {
+    display: flex;
+    gap: 28px;
+
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 14px;
+      margin-bottom: -15px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: $fb-text-muted;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+
+      &.active {
+        color: $fb-blue;
+        border-bottom-color: $fb-blue;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-cancel {
+      background: $fb-border-soft;
+      color: $fb-text;
+    }
+
+    .btn-save {
+      background: $fb-blue-dark;
+      color: $fb-white;
+    }
+  }
+}
+
+
+
+@media (max-width: 760px) {
+  .builder-container { flex-direction: column; }
+  .palette { flex: 1 1 auto; width: 100%; }
+  .row.two-col,
+  .validation-row { grid-template-columns: 1fr; }
+}
