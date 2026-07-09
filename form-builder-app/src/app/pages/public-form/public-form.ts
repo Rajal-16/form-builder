@@ -29,8 +29,6 @@ interface FieldValidation {
   errorText: string;
 }
 
-// Same shape as the CanvasField interface in form-builder.ts, so JSON.parse
-// of the "previewForm" localStorage entry maps onto it directly.
 interface CanvasField {
   id: string;
   kind: FieldKind;
@@ -293,8 +291,9 @@ export class PublicForm {
 
     this.formService.submitResponse(payload).subscribe({
       next: () => {
-        alert(this.setup.successMessage);
+       
         this.submitted = true;
+        this.cdr.detectChanges()
       },
       error: (err) => {
         console.error(err);

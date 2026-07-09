@@ -1,29 +1,30 @@
-<div class="preview-page">
+<div data-testid="preview-page" class="preview-page">
 
-  <div class="preview-wrapper" *ngIf="!submitted">
+  <div  data-testid="preview-wrapper" class="preview-wrapper" *ngIf="!submitted">
 
-    <div class="form-header-card">
+    <div class="form-header-card" data-testid="form-header">
       <div class="accent-bar"></div>
-      <img *ngIf="setup.logoUrl" [src]="setup.logoUrl" alt="" class="form-logo">
-      <h1 class="form-title">{{ setup.formName || 'Untitled Form' }}</h1>
-      <p class="form-description" *ngIf="setup.description">{{ setup.description }}</p>
+      <img  data-testid="form-logo" *ngIf="setup.logoUrl" [src]="setup.logoUrl" alt="" class="form-logo">
+      <h1 data-testid="preview-title" class="form-title">{{ setup.formName || 'Untitled Form' }}</h1>
+      <p  data-testid="form-description" class="form-description" *ngIf="setup.description">{{ setup.description }}</p>
     </div>
 
-    <form (ngSubmit)="onSubmit()" novalidate>
+    <form  data-testid="preview-form" (ngSubmit)="onSubmit()" novalidate>
 
-      <div class="field-card" *ngFor="let field of fields" [class.has-error]="errors[field.id]">
+      <div class="field-card"   data-testid="preview-field-card" *ngFor="let field of fields" [class.has-error]="errors[field.id]">
 
         <div class="field-label-row">
-          <label>{{ field.label || field.displayName }}</label>
-          <span class="required-star" *ngIf="field.required">*</span>
+          <label  data-testid="field-label">{{ field.label || field.displayName }}</label>
+          <span  data-testid="required-star" class="required-star" *ngIf="field.required">*</span>
         </div>
 
-        <p class="field-description" *ngIf="field.showDescription && field.description">
+        <p  data-testid="field-description" class="field-description" *ngIf="field.showDescription && field.description">
           {{ field.description }}
         </p>
 
         
         <input
+        data-testid="single-line-input"
           *ngIf="field.kind === 'single-line'"
           type="text"
           class="text-input"
@@ -33,6 +34,7 @@
 
       
         <textarea
+        data-testid="paragraph-input"
           *ngIf="field.kind === 'paragraph'"
           class="textarea-input"
           rows="3"
@@ -42,9 +44,10 @@
         </textarea>
 
         
-        <div class="options-list" *ngIf="field.kind === 'checkbox'">
+        <div  data-testid="checkbox-group" class="options-list" *ngIf="field.kind === 'checkbox'">
           <label class="option-row" *ngFor="let opt of field.options">
             <input
+             data-testid="checkbox-option"
               type="checkbox"
               [checked]="isChecked(field, opt)"
               (change)="toggleCheckbox(field, opt)">
@@ -53,9 +56,10 @@
         </div>
 
         
-        <div class="options-list" *ngIf="field.kind === 'radio'">
+        <div  data-testid="radio-group" class="options-list" *ngIf="field.kind === 'radio'">
           <label class="option-row" *ngFor="let opt of field.options">
             <input
+            data-testid="radio-option"
               type="radio"
               [name]="field.id"
               [value]="opt"
@@ -67,6 +71,7 @@
       
         <select
           *ngIf="field.kind === 'dropdown'"
+           data-testid="dropdown-input"
           class="select-input"
           [(ngModel)]="answers[field.id]"
           [name]="field.id">
@@ -76,6 +81,7 @@
 
         
         <input
+         data-testid="date-input"
           *ngIf="field.kind === 'date'"
           type="date"
           class="text-input"
@@ -84,6 +90,7 @@
 
        
         <input
+          data-testid="time-input"
           *ngIf="field.kind === 'time'"
           type="time"
           class="text-input"
@@ -91,30 +98,30 @@
           [name]="field.id">
 
        
-        <div class="upload-box" *ngIf="field.kind === 'upload'">
+        <div data-testid="upload-box" class="upload-box" *ngIf="field.kind === 'upload'">
           <label class="upload-btn">
             Choose File
-            <input type="file" (change)="onFileChange(field, $event)" hidden>
+            <input  data-testid="upload-input" type="file" (change)="onFileChange(field, $event)" hidden>
           </label>
-          <span class="file-name">{{ fileNames[field.id] || 'No file chosen' }}</span>
+          <span data-testid="file-name" class="file-name">{{ fileNames[field.id] || 'No file chosen' }}</span>
         </div>
 
         
-        <div class="image-placeholder" *ngIf="field.kind === 'image'">
+        <div  data-testid="image-upload" class="image-placeholder" *ngIf="field.kind === 'image'">
           <label class="upload-btn">
             Choose File
-            <input type="file" (change)="onFileChange(field, $event)" hidden>
+            <input  data-testid="image-input" type="file" (change)="onFileChange(field, $event)" hidden>
           </label>
         </div>
 
        
-        <label class="option-row terms-row" *ngIf="field.kind === 'terms'">
+        <label  data-testid="terms-checkbox" class="option-row terms-row" *ngIf="field.kind === 'terms'">
           <input type="checkbox" [(ngModel)]="answers[field.id]" [name]="field.id">
           <span>{{ field.placeholder || field.label || 'I agree to the terms and conditions' }}</span>
         </label>
 
     
-        <div class="rating-row" *ngIf="field.kind === 'rating-star'">
+        <div data-testid="rating-star" class="rating-row" *ngIf="field.kind === 'rating-star'">
           <span
             class="star"
             *ngFor="let n of ratingRange(field)"
@@ -123,7 +130,7 @@
         </div>
 
   
-        <div class="rating-row" *ngIf="field.kind === 'rating-number'">
+        <div data-testid="rating-number" class="rating-row" *ngIf="field.kind === 'rating-number'">
           <span
             class="number-pill"
             *ngFor="let n of ratingRange(field)"
@@ -131,17 +138,17 @@
             (click)="setRating(field, n)">{{ n }}</span>
         </div>
 
-        <small class="error" *ngIf="errors[field.id]">{{ errors[field.id] }}</small>
+        <small data-testid="field-error" class="error" *ngIf="errors[field.id]">{{ errors[field.id] }}</small>
 
       </div>
 
-      <div class="empty-hint" *ngIf="fields.length === 0">
+      <div   data-testid="empty-preview-message" class="empty-hint" *ngIf="fields.length === 0">
         This form doesn't have any fields yet. Go back to the Form Builder to add some.
       </div>
 
       <div class="submit-row" *ngIf="fields.length > 0">
-        <button type="submit" class="submit-btn">{{ setup.buttonName || 'Submit' }}</button>
-        <button type="button" class="back-btn" (click)="backToBuilder()">Back to Builder</button>
+        <button type="submit" data-testid="submit-button" class="submit-btn">{{ setup.buttonName || 'Submit' }}</button>
+        <button type="button"  data-testid="back-button" class="back-btn" (click)="backToBuilder()">Back to Builder</button>
       </div>
 
     </form>
@@ -149,11 +156,11 @@
   </div>
 
 
-  <div class="success-wrapper" *ngIf="submitted">
+  <div class="success-wrapper"  data-testid="success-wrapper" *ngIf="submitted">
     <div class="success-card">
       <div class="accent-bar"></div>
-      <p class="success-message">{{ setup.successMessage }}</p>
-      <a class="submit-another" (click)="submitAnother()">Submit another response</a>
+      <p class="success-message" data-testid="success-message">{{ setup.successMessage }}</p>
+      <a class="submit-another" data-testid="submit-another"(click)="submitAnother()">Submit another response</a>
     </div>
   </div>
 

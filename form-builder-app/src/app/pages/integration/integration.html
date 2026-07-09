@@ -1,33 +1,33 @@
 <div class="page-container">
 
-     <h1 class="form-title">FORM BUILDER</h1>
+     <h1 data-testid="integration-heading" class="form-title">FORM BUILDER</h1>
 
     <div class="tabs-wrapper">
 
-        <div routerLink="/form-setup"   class="tab">
+        <div data-testid="form-setup-tab" routerLink="/form-setup"   class="tab">
             <img src="assets/images/frame-1.png" alt="">
             Form Setup
         </div>
 
-        <div routerLink="/form-builder"  class="tab ">
+        <div data-testid="form-builder-tab" routerLink="/form-builder"  class="tab ">
             <img src="assets/images/frame-2.png" alt="">
             Form Builder
         </div>
 
-        <div routerLink="/integration"  class="tab active">
+        <div data-testid="integration-tab" routerLink="/integration"  class="tab active">
             <img src="assets/images/frame-3.png" alt="">
             Integration Code
         </div>
 
          <div class="action-buttons">
 
-            <button type="button" class="btn-cancel" (click)="cancel()">
+            <button data-testid="cancel-button" type="button" class="btn-cancel" (click)="cancel()">
                 <img src="assets/images/vector-2.png" alt="">
                 Cancel
             </button>
 
           
-            <button type="button" class="btn-save" (click)="PublishForm()">
+            <button data-testid="publish-form-button" type="button" class="btn-save" (click)="PublishForm()">
                 <img src="assets/images/vector-4.png" alt="">
                 Publish form
             </button>
@@ -38,31 +38,31 @@
 <div class="integration-container">
   <div class="integration-grid">
     
-    <div class="panel left-panel">
+    <div  data-testid="left-panel" class="panel left-panel">
       <div class="form-link-bar">
-        <span class="link-text">{{ formUrl }}</span>
+        <span data-testid="form-url" class="link-text">{{ formUrl }}</span>
         
-         <img  class="icon-btn" (click)="copy(formUrl)" src="/assets/images/copy-link1.png" alt="" width="20px" height="20px">
+         <img data-testid="copy-link-button" class="icon-btn" (click)="copy(formUrl)" src="/assets/images/copy-link1.png" alt="" width="20px" height="20px">
        
       </div>
 
-      <div class="qr-wrapper">
+      <div  data-testid="qr-code" class="qr-wrapper">
         <qrcode [qrdata]="formUrl" [width]="200"></qrcode>
       </div>
 
-      <button class="download-btn" (click)="copy(formUrl)">
+      <button data-testid="download-button" class="download-btn" (click)="copy(formUrl)">
   <i class="icon-download"></i> Download
 </button>
     </div>
 
-    <div class="panel right-panel">
-      <div class="code-badge">{{ embedCode.length }} × 3</div>
+    <div data-testid="right-panel"  class="panel right-panel">
+      <div data-testid="code-badge" class="code-badge">{{ embedCode.length }} × 3</div>
       <div class="code-header">
   
-   <img class="icon-btn dark" (click)="copy(embedCode)" [class.copied]="isCopied" src="/assets/images/copy-link1.png" alt="" width="20px" height="20px">
+   <img  data-testid="copy-code-button" class="icon-btn dark" (click)="copy(embedCode)" [class.copied]="isCopied" src="/assets/images/copy-link1.png" alt="" width="20px" height="20px">
  
 </div>
-     <pre class="code-block"><code>{{ embedCode }}</code></pre>
+     <pre data-testid="embed-code" class="code-block"><code>{{ embedCode }}</code></pre>
     </div>
   </div>
 </div>
