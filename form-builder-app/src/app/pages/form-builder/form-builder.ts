@@ -270,6 +270,14 @@ ngOnInit() {
    }
 
   publishForm() {
+
+
+     if(this.fields.length===0){
+      alert("No field is selected");
+      return;
+    }else{
+   
+
   const payload = {
     ...this.formSetupData,
     fields: this.fields
@@ -289,6 +297,8 @@ ngOnInit() {
       console.error(err);
     }
   });
+
+}
 }
 
   preview() {
