@@ -66,7 +66,9 @@ export class FormSetupComponent {
    this.form = this.fb.group({
   formName: ['', [Validators.required, Validators.minLength(3)]],
   branch: ['', Validators.required],
-  logoUrl: [''],
+  logoUrl: ['', Validators.pattern(
+    /^https?:\/\/[^\s]+(?:\.(?:jpg|jpeg|png|gif|webp|svg|bmp))(?:\?[^\s]*)?$/i
+  )],
   section: ['', Validators.required],
   responsibleUser: [''],
   status: ['unpublished', Validators.required],
